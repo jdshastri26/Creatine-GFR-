@@ -1,0 +1,65 @@
+Python script to calculate eGFR based on the CKD-EPI equation for a female patient aged 45 with a serum creatinine level of 2.7 mg/dL:
+
+def calculate_egfr(creatinine, age, sex, race='non-black'):
+    # CKD-EPI equation constants
+    k = 0.7 if sex == 'female' else 0.9
+    alpha = -0.329 if sex == 'female' else -0.411
+    min_creatinine = min(creatinine / k, 1)
+    max_creatinine = max(creatinine / k, 1)
+    
+     race == 'asian':
+        race_factor = 1.159
+
+    
+    # CKD-EPI equation
+    egfr = 141 * (min_creatinine ** alpha) * (max_creatinine ** -1.209) * (0.993 ** age) * race_factor
+    return egfr
+
+# Patient data
+creatinine = 2.7  # mg/dL
+age = 45
+sex = 'female'
+
+# Calculate eGFR
+egfr = calculate_egfr(creatinine, age, sex)
+
+print(f"The estimated glomerular filtration rate (eGFR) is {egfr:.2f} mL/min/1.73m²")
+
+In this specific scenario:
+
+    The patient is a 45-year-old female.
+    Serum creatinine level is 2.7 mg/dL.
+    The patient is asian.
+
+
+refined scrip  
+
+def calculate_egfr(creatinine, age, sex, race='non-black'):
+    # CKD-EPI equation constants
+    k = 0.7 if sex == 'female' else 0.9
+    alpha = -0.329 if sex == 'female' else -0.411
+    min_creatinine = min(creatinine / k, 1)
+    max_creatinine = max(creatinine / k, 1)
+    
+    if race == 'black':
+        race_factor = 1.159
+    else:
+        race_factor = 1.0
+    
+    # CKD-EPI equation
+    egfr = 141 * (min_creatinine ** alpha) * (max_creatinine ** -1.209) * (0.993 ** age) * race_factor
+    return egfr
+
+# Patient data
+creatinine = 2.7  # mg/dL
+age = 45
+sex = 'female'
+race = 'asian'
+
+# Calculate eGFR
+egfr = calculate_egfr(creatinine, age, sex, race)
+
+print(f"The estimated glomerular filtration rate (eGFR) is {egfr:.2f} mL/min/1.73m²")
+
+
+
